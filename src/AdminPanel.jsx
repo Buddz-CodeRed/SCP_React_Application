@@ -50,4 +50,20 @@ export default function AdminPanel(){
             setNewRecord({item: '', object_class: '', containment_procedure: '', description: '', image: ''}) // Resets form back to empty strings
         }
     }
+
+    // Create async function to delete from the database via id
+    const deleteRecord = async (id) => {
+        const {error} = await supabase.from('scp_data').delete().eq('id', id)
+        if(error) 
+        {
+            console.error(error)
+        }
+        else
+        {
+            // filters out the deleted record from state
+            setRecords(records.filter((record) => record.id !== id))
+        }
+    }
+
+    
 }
