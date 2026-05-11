@@ -65,5 +65,62 @@ export default function AdminPanel(){
         }
     }
 
-    
+    // Create Edit functionality
+
+    // Create function to prepare a record for editing when a user clicks the edit button
+    const startEditing = (records) => {
+        // Saves the full record into editRecord state; triggers edit inputs to display for the current record
+        setEditRecords(records)
+    }
+
+    // Create async function to save updated record
+    const saveEdit = async (id) => {
+        const {error} = await supabase.from('scp_data').update(editRecords).eq('id', id)
+        if(error)
+        {
+            console.error(error)
+        }
+        else
+        {
+            // update old state record with the update record
+            setRecords(records.map((record) => record.id === id ? editRecords : record))
+            // Clears editRecord state
+            setEditRecords(null)
+        }
+    }
+
+    return(
+        <div>
+            <h1>Admin Panel</h1>
+            <ul>
+                {
+                    records.map(
+                        (record) => {
+                            <li key={record.id}>
+                                {
+                                    editRecords && editRecords.id == record.id ? (
+                                        <div>
+                                            <input value={editRecords.item} onChange={(e)=>setEditRecords({...editRecords, item: e.target.value})}/>
+                                            <input value={editRecords.object_class} onChange={(e)=>setEditRecords({...editRecords, object_class: e.target.value})}/>
+                                            <input value={editRecords.containment_procedure} onChange={(e)=>setEditRecords({...editRecords, containment_procedure: e.target.value})}/>
+                                            <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})}/>
+                                            <input value={editRecords.image} onChange={(e)=>setEditRecords({...editRecords, image: e.target.value})}/>
+                                            <button onClick={()=>saveEdit}>Save</button>
+                                            <button onClick={()=>setEditRecords(null)}>Cancel</button>
+                                        </div>
+                                    ):(
+                                        <div>
+                                            <p>{record.item}</p>
+                                            <button onClick={()=>startEditing(record)}>Edit</button>
+                                            <button onClick={()=>deleteRecord(record.id)}>Delete</button>
+                                        </div>
+                                    )
+                                }
+                            </li>
+                        }
+                    )
+                }
+            </ul>
+        </div>
+    )
 }
