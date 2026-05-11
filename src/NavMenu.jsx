@@ -21,7 +21,7 @@ export default function NavMenu() {
                 }
                 else
                 {
-                    // update records state with array of records; triggers re-render
+                    // update records state with array of records; triggers component to re-render
                     setRecord(data)
                 }
             }
