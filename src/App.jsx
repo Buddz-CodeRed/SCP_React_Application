@@ -14,10 +14,9 @@ export default function App() {
           <div>
             <h1>Testing React Application</h1>
           </div>
-        }>
-        </Route>
-        <Route path='/records/:id'>{<RecordDetails/>}</Route>
-        <Route path='/admin/'>{<AdminPanel/>}</Route>
+        }/>
+        <Route path='/records/:id' element={<RecordDetails/>}></Route>
+        <Route path='/admin/' element={<AdminPanel/>}></Route>
       </Routes>
     </Router>
   )
