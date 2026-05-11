@@ -47,6 +47,7 @@ export default function NavMenu() {
                     )
                 }
                 {/* create link to admin panel */}
+                <Link to='/a'>Admin Panel</Link>
             </ul>
         </nav>
     )
