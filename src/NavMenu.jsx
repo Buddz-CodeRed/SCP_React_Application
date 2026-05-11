@@ -14,7 +14,7 @@ export default function NavMenu() {
             const fetchRecords = async () => {
                 // query db only selecting the id and item and store in 'data' variable
                 // waits for process to complete before continuing
-                const {data, error} = await supabase.from('scp_data').select('id', 'item') 
+                const {data, error} = await supabase.from('scp_data').select('id, item') 
                 if (error)
                 {
                     console.error(error) // display error
@@ -47,7 +47,7 @@ export default function NavMenu() {
                     )
                 }
                 {/* create link to admin panel */}
-                <Link to='/a'>Admin Panel</Link>
+                <Link to='/admin'>Admin Panel</Link>
             </ul>
         </nav>
     )
