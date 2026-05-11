@@ -121,6 +121,14 @@ export default function AdminPanel(){
                     )
                 }
             </ul>
+
+            <h2>Add New Record</h2>
+
+            <input value={newRecord.item} onChange={(e)=>setNewRecord({...newRecord, item: e.target.value})} placeholder='Item'/>
+            <input value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Item'/>
+            <input value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Item'/>
+            <input value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Item'/>
+            <input value={newRecord.image} onChange={(e)=>setNewRecord({...newRecord, image: e.target.value})} placeholder='Item'/>
         </div>
     )
 }
