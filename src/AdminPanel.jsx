@@ -6,6 +6,7 @@ export default function AdminPanel(){
     
     const [records, setRecords] = useState([]) // set component state to store all records fetcher from db; starts in an empty state
     const [editRecords, setEditRecords] = useState(null) // set component state to hold current record being edited; starts in an empty state
+    const [imageFile, setImageFile] = useState(null)
     const [newRecord, setNewRecord] = useState( // set component state to hold values typed into the Add new record form: starts with empty strings for each field
         {
             item: '',
@@ -38,16 +39,36 @@ export default function AdminPanel(){
 
     // Create aysnc function to INSRET a new record into the database
     const addRecord = async () => {
-        // runs insert query
-        const {data, error} = await supabase.from('scp_data').insert([newRecord]).select().single()
+
+        // upload image to supabase bucket
+        let fileName = null
+
+        if(imageFile) {
+            const fileExt = imageFile.name.split('.').pop()
+            fileName = `${crypto.randomUUID()}.${fileExt}`
+
+            const {error: uploadError} = await supabase.storage.from('image').upload(fileName, imageFile) // CHECK THIS CODE <LINE>
+
+            if (uploadError) {
+                console.error(uploadError)
+                return
+            }
+        }
+        const { id, ...cleanRecord } = newRecord;
+
+        const { data, error } = await supabase
+            .from('scp_data')
+            .insert([{ ...cleanRecord, image: fileName }])
+            .select();
         if (error)
         {
             console.error(error)
         }
         else
         {
-            setModels([...records, data])// adds new records to existing list
+            setRecords([...records, ...data])// adds new records to existing list
             setNewRecord({item: '', object_class: '', containment_procedure: '', description: '', image: ''}) // Resets form back to empty strings
+            setImageFile(null)
         }
     }
 
@@ -94,30 +115,37 @@ export default function AdminPanel(){
             <h1>Admin Panel</h1>
             <ul>
                 {
-                    records.map(
-                        (record) => {
+                    records.map((record) => (
                             <li key={record.id}>
                                 {
-                                    editRecords && editRecords.id == record.id ? (
+                                    editRecords && editRecords.id === record.id ? (
                                         <div>
                                             <input value={editRecords.item} onChange={(e)=>setEditRecords({...editRecords, item: e.target.value})}/>
                                             <input value={editRecords.object_class} onChange={(e)=>setEditRecords({...editRecords, object_class: e.target.value})}/>
                                             <input value={editRecords.containment_procedure} onChange={(e)=>setEditRecords({...editRecords, containment_procedure: e.target.value})}/>
                                             <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})}/>
-                                            <input value={editRecords.image} onChange={(e)=>setEditRecords({...editRecords, image: e.target.value})}/>
-                                            <button onClick={()=>saveEdit}>Save</button>
+                                            <button onClick={()=>saveEdit(record.id)}>Save</button>
                                             <button onClick={()=>setEditRecords(null)}>Cancel</button>
                                         </div>
                                     ):(
                                         <div>
                                             <p>{record.item}</p>
+
+                                            {record.image && (
+                                                <img
+                                                    src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
+                                                    alt={record.item}
+                                                    width="100"
+                                                />
+                                            )}
+
                                             <button onClick={()=>startEditing(record)}>Edit</button>
                                             <button onClick={()=>deleteRecord(record.id)}>Delete</button>
                                         </div>
                                     )
                                 }
                             </li>
-                        }
+                        )
                     )
                 }
             </ul>
@@ -125,10 +153,11 @@ export default function AdminPanel(){
             <h2>Add New Record</h2>
 
             <input value={newRecord.item} onChange={(e)=>setNewRecord({...newRecord, item: e.target.value})} placeholder='Item'/>
-            <input value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Item'/>
-            <input value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Item'/>
-            <input value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Item'/>
-            <input value={newRecord.image} onChange={(e)=>setNewRecord({...newRecord, image: e.target.value})} placeholder='Item'/>
+            <input value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Object Class'/>
+            <input value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
+            <input value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Description'/>
+            <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])}/>
+            <button onClick={addRecord}>Add Record</button>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import {useParams} from 'react-router' // captures dynamic value from URL in Bro
 export default function RecordDetails() {
 
     const{id} = useParams() // extracts the 'id' value from current URL
-    const {recordData, setRecordData} = useState(null) // creates a state variable 'recordData' to store fetched record, starts as null
+    const [recordData, setRecordData] = useState(null) // creates a state variable 'recordData' to store fetched record, starts as null
 
     useEffect(
         // creates a function to call later
@@ -44,7 +44,7 @@ export default function RecordDetails() {
                         <p>{recordData.description}</p>
                         <h3>Contain Procedure</h3>
                         <p>{recordData.containment_procedure}</p>
-                        <img src={recordData.image} alt="SCP Image" />                        
+                        <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${recordData.image}`} alt="SCP Image" />                        
                     </div>
                 ):(
                     <p>Loading...</p>
