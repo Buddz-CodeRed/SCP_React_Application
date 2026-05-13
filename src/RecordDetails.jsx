@@ -14,7 +14,7 @@ export default function RecordDetails() {
             const fetchRecordDetails = async () =>
             {
                 // query db selecting all records with a matching id, and return a single object
-                const {data, error} = await supabase.from('scp_data').select('*').eq('id', id).single()
+                const {data, error} = await supabase.from('scp_data').select('*').eq('id', id).maybeSingle()
                 if(error)
                 {
                     // log error to the console
