@@ -131,13 +131,13 @@ export default function AdminPanel(){
                                         <div>
                                             <p>{record.item}</p>
 
-                                            {record.image && (
+                                            {/* {record.image && (
                                                 <img
                                                     src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
                                                     alt={record.item}
                                                     width="100"
                                                 />
-                                            )}
+                                            )} */}
 
                                             <button onClick={()=>startEditing(record)}>Edit</button>
                                             <button onClick={()=>deleteRecord(record.id)}>Delete</button>

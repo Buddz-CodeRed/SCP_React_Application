@@ -32,6 +32,7 @@ export default function NavMenu() {
 
     return(
         <div className='nav-container'>
+            
             <nav className=''>
                 <div className='container-fluid'>
                     <ul className='nav-Cards-List'>

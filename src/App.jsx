@@ -6,13 +6,14 @@ import AdminPanel from "./AdminPanel"
 export default function App() {
   return(
     <Router>
-      <NavMenu/>
       <AdminPanel/>
+      <NavMenu/>
+      
       <Routes>
         <Route path='/' element=
         {
           // Design Main App Dashboard
-          <div>
+          <div className="base-container">
             <h1>Testing React Application</h1>
           </div>
         }/>
