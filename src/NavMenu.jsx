@@ -32,20 +32,28 @@ export default function NavMenu() {
 
     return(
         <div className='nav-container'>
-            
             <nav className=''>
                 <div className='container-fluid'>
                     <ul className='nav-Cards-List'>
                         {   // loops over the records array
                             // creates a link for each record via id
                             records.map(
+
+                                
                                 // stores individual record during the looping process
                                 (record) => (
                                     // identifies each record in the array 
                                     <li key={record.id}>
                                         {/* creates a link to each record using record item value */}
-                                        <Link className='' to={`/records/${record.id}`}>{record.item}</Link>
+                                        <Link to={`/records/${record.id}`}>
+                                            <img
+                                                src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
+                                                alt={record.item}
+                                                className="w-full h-auto cursor-pointer"
+                                            />
+                                        </Link>                                        
                                     </li>
+                                    
                                 )
                             )
                         }

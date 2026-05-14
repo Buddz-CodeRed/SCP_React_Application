@@ -13,7 +13,7 @@ export default function App() {
         <Route path='/' element=
         {
           // Design Main App Dashboard
-          <div className="base-container">
+          <div>
             <h1>Testing React Application</h1>
           </div>
         }/>
