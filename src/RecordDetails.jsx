@@ -32,10 +32,10 @@ export default function RecordDetails() {
     )
 
     return(
-        <div>
+        <div className='des-container'>
             {
                 recordData ? (
-                    <div>
+                    <div className='des-content-wrapper'>
                         <h1>Item</h1>
                         <h2>{recordData.item}</h2>
                         <h1>Object Class</h1>

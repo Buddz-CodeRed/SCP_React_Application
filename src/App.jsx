@@ -7,6 +7,7 @@ export default function App() {
   return(
     <Router>
       <NavMenu/>
+      <AdminPanel/>
       <Routes>
         <Route path='/' element=
         {
@@ -16,7 +17,7 @@ export default function App() {
           </div>
         }/>
         <Route path='/records/:id' element={<RecordDetails/>}></Route>
-        <Route path='/admin/' element={<AdminPanel/>}></Route>
+        {/* <Route path='/admin/' element={<AdminPanel/>}></Route> */}
       </Routes>
     </Router>
   )

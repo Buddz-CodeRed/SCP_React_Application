@@ -31,25 +31,29 @@ export default function NavMenu() {
     )
 
     return(
-        <nav>
-            <ul>
-                {   // loops over the records array
-                    // creates a link for each record via id
-                    records.map(
-                        // stores individual record during the looping process
-                        (record) => (
-                            // identifies each record in the array 
-                            <li key={record.id}>
-                                {/* creates a link to each record using record item value */}
-                                <Link to={`/records/${record.id}`}>{record.item}</Link>
-                            </li>
-                        )
-                    )
-                }
-                {/* create link to admin panel */}
-                <Link to='/admin'>Admin Panel</Link>
-            </ul>
-        </nav>
+        <div className='nav-container'>
+            <nav className=''>
+                <div className='container-fluid'>
+                    <ul className='nav-Cards-List'>
+                        {   // loops over the records array
+                            // creates a link for each record via id
+                            records.map(
+                                // stores individual record during the looping process
+                                (record) => (
+                                    // identifies each record in the array 
+                                    <li key={record.id}>
+                                        {/* creates a link to each record using record item value */}
+                                        <Link className='' to={`/records/${record.id}`}>{record.item}</Link>
+                                    </li>
+                                )
+                            )
+                        }
+                        {/* create link to admin panel */}
+                        <Link to='/admin'>Admin Panel</Link>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     )
 }
 

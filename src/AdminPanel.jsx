@@ -111,7 +111,7 @@ export default function AdminPanel(){
     }
 
     return(
-        <div>
+        <div className='admin-container'>
             <h1>Admin Panel</h1>
             <ul>
                 {
