@@ -1,24 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import NavMenu from "./NavMenu"
+import CardMenu from "./CardMeun"
 import RecordDetails from "./RecordDetails"
 import AdminPanel from "./AdminPanel"
+import Window from "./Window"
 
 export default function App() {
   return(
     <Router>
-      <AdminPanel/>
-      <NavMenu/>
-      
+      <NavMenu/>      
       <Routes>
-        <Route path='/' element=
-        {
-          // Design Main App Dashboard
-          <div>
-            <h1>Testing React Application</h1>
-          </div>
-        }/>
-        <Route path='/records/:id' element={<RecordDetails/>}></Route>
-        {/* <Route path='/admin/' element={<AdminPanel/>}></Route> */}
+        <Route path="/window/:viewName" element={<Window/>} />
+        <Route path="/window/details/:id" element={<Window/>} />
       </Routes>
     </Router>
   )

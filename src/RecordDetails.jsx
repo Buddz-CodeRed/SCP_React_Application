@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'// useEffect: fetching data | useState: storing data
 import { supabase } from './supabase' // connects to database
-import { useParams } from 'react-router' // captures dynamic value from URL in BrowserRouter
+import { useParams } from 'react-router-dom' // captures dynamic value from URL in BrowserRouter
 
-export default function RecordDetails() {
+export default function RecordDetails({id}) {
 
-    const { id } = useParams() // extracts the 'id' value from current URL
+    // const { id } = useParams() // extracts the 'id' value from current URL
     const [recordData, setRecordData] = useState(null) // creates a state variable 'recordData' to store fetched record, starts as null
 
     useEffect(
         // creates a function to call later
         () => {
+            console.log("RecordID received:", id)
             // defines async function 
             const fetchRecordDetails = async () => {
                 // query db selecting all records with a matching id, and return a single object
