@@ -33,22 +33,28 @@ export default function CardMenu() {
     return(
         <div className='card-container'>
             <nav>
-                <div className='container-fluid'>
-                    <ul className='card-List'>
+                <div className='container-fluid p-3'>
+                    <ul className='card-list'>
                         {   // loops over the records array
                             // creates a link for each record via id
                             records.map(                                
                                 // stores individual record during the looping process
                                 (record) => (
                                     // identifies each record in the array 
-                                    <li key={record.id} className='list-unstyled'>
+                                    <li key={record.id} className='card-item'>
                                         {/* creates a link to each record using record item value */}
-                                        <Link to={`/window/details/${record.id}`}>
-                                            <img
-                                                src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
-                                                alt={record.item}
-                                                className="w-100 h-auto cursor-pointer"
-                                            />
+                                        <Link to={`/window/details/${record.id}`} className='card-link'>
+                                            <div className='card-wrap'>
+                                                <img
+                                                    src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
+                                                    alt={record.item}
+                                                    className="w-100 h-auto cursor-pointer card-image"
+                                                />
+                                            </div>
+                                            {/* card name */}
+                                            <div className='card-body'>
+                                                <div className='card-name'>{record.item}</div>
+                                            </div>
                                         </Link>                                        
                                     </li>                                    
                                 )
