@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'// useEffect: fetching data | useStat
 import { supabase } from './supabase' // connects to database
 import { useParams } from 'react-router-dom' // captures dynamic value from URL in BrowserRouter
 
-export default function RecordDetails({id}) {
+export default function RecordDetails() {
 
-    // const { id } = useParams() // extracts the 'id' value from current URL
+    const { id } = useParams() // extracts the 'id' value from current URL
     const [recordData, setRecordData] = useState(null) // creates a state variable 'recordData' to store fetched record, starts as null
 
     useEffect(
