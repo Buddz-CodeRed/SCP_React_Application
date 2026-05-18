@@ -34,8 +34,8 @@ export default function CardMenu() {
 
     return(
         <div className='card-container'>
-            <nav>
-                <div className='card-scroll'>
+            <div className='card-scroll'>
+                <nav>
                     <div className='container-fluid p-3'>
                         <ul className='card-list'>
                             {   // loops over the records array
@@ -65,8 +65,8 @@ export default function CardMenu() {
                             }
                         </ul>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
     )
 }

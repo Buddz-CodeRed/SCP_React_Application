@@ -18,6 +18,8 @@
 .base-container {
     display: flex;
     align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* NavMenu.jsx */
@@ -97,6 +99,7 @@
 .window-container {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 /* RecordDetails.jsx */
