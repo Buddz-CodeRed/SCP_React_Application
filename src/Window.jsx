@@ -2,33 +2,23 @@ import { useParams } from "react-router-dom"
 import CardMenu from "./CardMeun"
 import RecordDetails from "./RecordDetails"
 import AdminPanel from "./AdminPanel"
-import SidePane from "./SidePane"
 
 export default function Window() {
-
-    const { viewName, id } = useParams()
-
-    // console.log("Window.jsx - viewName:", viewName, "| id:", id) // debugging
-
-    //Special handling for /window/details/:id route
-    if (id) {
-        return (
-            <div className="window-container">
-                <RecordDetails id={id} />
-            </div>
-        )
-    }
-
-    // Normal views (cards, admin, etc.)
-    const view = {
-        cards: <CardMenu />,
-        details: <RecordDetails id={id} />,
-        admin: <AdminPanel />
-    }
-
     return (
         <div className="window-container">
-            {view[viewName] || <CardMenu />}
+            {/* This is where child routes will render */}
+            <Outlet />
         </div>
     )
 }
+
+// import { Outlet } from "react-router-dom"
+
+// export default function Window() {
+//     return (
+//         <div className="window-container">
+//             {/* This is where child routes will render */}
+//             <Outlet />
+//         </div>
+//     )
+// }
