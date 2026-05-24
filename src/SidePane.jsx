@@ -1,38 +1,41 @@
-import RecordDetails from "./RecordDetails"
+import './assets/SidePane.css'
+import { X } from 'lucide-react'
 
 
-export default function SidePane({recordData, onOpenFull}) {
+export default function SidePane({recordData, onOpenFull, onClose}) {
+
 
     if (!recordData) {
             return(
-                <div className="side-pane">Select a Record</div>
+                <div className="side-pane">No Data Received</div>
             )
         }
-
+        console.log(recordData)
     return(
         <div className={`side-pane ${recordData ? 'open' : ''}`}>
-                <div className='detail-item'>{recordData.item}</div>
-            <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${recordData.image}`} className='detail-image' alt="SCP Image" />
+            <span className='pane-item'>{recordData.item}</span>
+            <button className='pane-close' onClick={onClose}><X /></button>
+            <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${recordData.image}`} className='pane-image' alt="SCP Image" />
             {/* meta data */}
-            <div className="detail-meta">
-                <div className="detail-meta-row">
-                    <span className="detail-key">ITEM#:</span>
-                    <span className="detail-value">{recordData.item}</span>
+            <div className="pane-meta">
+                <div className="pane-meta-row">
+                    <span className="pane-key">ITEM#:</span>
+                    <span className="pane-value">{recordData.item}</span>
                 </div>
-                <div className="detail-meta-row">
-                    <span className="detail-key">OBJECT CLASS:</span>
-                    <span className="detail-value ob_class">{recordData.object_class}</span>
+                <div className="pane-meta-row">
+                    <span className="pane-key">OBJECT CLASS:</span>
+                    <span className="pane-value ob_class">{recordData.object_class}</span>
                 </div>
             </div>
             {/* description */}
-            <div className="detail-section">
-                <div className="detail-section-title">Description</div>
-                <p className="detail-section-text">
+            <div className="pane-section">
+                <div className="pane-section-title">Description</div>
+                <p className="pane-section-text">
                     {recordData.description}
                 </p>
             </div>
-            <div className="side-pane-btn">
-                <button onClick={() => onOpenFull(<RecordDetails/>)}>View full details</button>
+            <div className="pane-btn-container">
+                <button className="view-record" onClick={() => onOpenFull(recordData.id)}>View full details</button>
             </div>
         </div>
     )

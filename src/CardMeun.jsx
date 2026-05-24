@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom' // navigate through links with out full 
 import { supabase } from './supabase' // connects to database
 import SidePane from './SidePane'
 import { useNavigate } from 'react-router-dom'
-
-const PER_PAGE = 8
+import './assets/CardMenu.css'
 
 export default function CardMenu() {
 
@@ -15,6 +14,7 @@ export default function CardMenu() {
     // Sidepane state
     const [sidepane, setSidePane] = useState(false)
     const [selectedRecord, setSelectedRecord] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -22,7 +22,7 @@ export default function CardMenu() {
             const fetchRecords = async () => {
                 // query db only selecting the id and item and store in 'data' variable
                 // waits for process to complete before continuing
-                const { data, error } = await supabase.from('scp_data').select('id, item, image').order('item', { ascending: true })
+                const { data, error } = await supabase.from('scp_data').select('id, item, image, object_class, description').order('item', { ascending: true })
                 if (error) {
                     console.error(error) // display error
                 }
@@ -75,7 +75,9 @@ export default function CardMenu() {
             {/* render sidepane when card is clicked */}
             {sidepane && (
                 <SidePane recordData={selectedRecord} 
-                onOpenFull={(id) => Navigate(`/window/details/${id}`)} />
+                onOpenFull={(id) => navigate(`/window/details/${id}`)}
+                onClose={() => {setSidePane(false); setSelectedRecord(null)}} 
+                />
             )}
         </div>
     )

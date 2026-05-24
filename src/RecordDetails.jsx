@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'// useEffect: fetching data | useState: storing data
 import { supabase } from './supabase' // connects to database
 import { useParams } from 'react-router-dom' // captures dynamic value from URL in BrowserRouter
+import './assets/RecordDetails.css'
 
 export default function RecordDetails() {
 

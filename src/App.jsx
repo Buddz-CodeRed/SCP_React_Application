@@ -8,20 +8,11 @@ import Window from "./Window"
 export default function App() {
   return(
     <Router>
-      <div className="base-container">
-        <NavMenu/>   
-          <div className="window-container">
-            <Routes>
-              {/* <Route path="/window/:viewName" element={<Window/>} />
-              <Route path="/window/details/:id" element={<Window/>} /> */}
-              <Route path="/window" element={<Window />}>
-                <Route path="cards" element={<CardMenu/>} />
-                <Route path="details/:id" element={<RecordDetails/>} />
-                <Route path="admin" element={<AdminPanel/>} />
-              </Route>
-            </Routes>
-          </div>
-      </div>
+      <NavMenu/>      
+      <Routes>
+        <Route path="/window/details/:id" element={<Window/>} />
+        <Route path="/window/:viewName" element={<Window/>} />
+      </Routes>
     </Router>
   )
 }

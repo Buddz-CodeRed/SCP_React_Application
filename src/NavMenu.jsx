@@ -3,6 +3,7 @@ import {supabase} from './supabase' // connects to database
 import CardMenu from './CardMeun';
 import RecordDetails from './RecordDetails';
 import AdminPanel from './AdminPanel';
+import './assets/NavMenu.css'
 
 export default function NavMenu() {
 

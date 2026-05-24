@@ -113,6 +113,16 @@ export default function AdminPanel(){
     return(
         <div className='admin-container'>
             <h1>Admin Panel</h1>
+
+            <h2>Add New Record</h2>
+
+            <input value={newRecord.item} onChange={(e)=>setNewRecord({...newRecord, item: e.target.value})} placeholder='Item'/>
+            <input value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Object Class'/>
+            <input value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
+            <input value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Description'/>
+            <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])}/>
+            <button onClick={addRecord}>Add Record</button>
+            
             <ul>
                 {
                     records.map((record) => (
@@ -149,15 +159,6 @@ export default function AdminPanel(){
                     )
                 }
             </ul>
-
-            <h2>Add New Record</h2>
-
-            <input value={newRecord.item} onChange={(e)=>setNewRecord({...newRecord, item: e.target.value})} placeholder='Item'/>
-            <input value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Object Class'/>
-            <input value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
-            <input value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Description'/>
-            <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])}/>
-            <button onClick={addRecord}>Add Record</button>
         </div>
     )
 }

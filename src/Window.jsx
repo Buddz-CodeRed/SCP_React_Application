@@ -8,8 +8,6 @@ export default function Window() {
 
     const { viewName, id } = useParams()
 
-    // console.log("Window.jsx - viewName:", viewName, "| id:", id) // debugging
-
     //Special handling for /window/details/:id route
     if (id) {
         return (
