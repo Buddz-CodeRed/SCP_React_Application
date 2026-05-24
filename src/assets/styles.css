@@ -330,4 +330,28 @@
     flex: 1;
     overflow-y: scroll;
     min-height: 0;
+    transition: margin-right 0.3s ease;
+}
+
+.card-scroll.pushed {
+    margin-right: 300px;    /* matches side pane width */
+}
+
+/* SidePane.jsx */
+
+.side-pane {
+    position: fixed;
+    top: 0;
+    right: -300px;          /* hidden off screen to the right */
+    width: 300px;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #1a1a1a;
+    border-left: 1px solid #2a2a2a;
+    z-index: 100;
+    transition: right 0.3s ease;
+}
+
+.side-pane.open {
+    right: 0;               /* slides in */
 }
