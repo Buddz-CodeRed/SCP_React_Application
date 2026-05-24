@@ -11,6 +11,7 @@ export default function SidePane({recordData, onOpenFull, onClose}) {
             )
         }
         console.log(recordData)
+
     return(
         <div className={`side-pane ${recordData ? 'open' : ''}`}>
             <span className='pane-item'>{recordData.item}</span>
@@ -23,10 +24,19 @@ export default function SidePane({recordData, onOpenFull, onClose}) {
                     <span className="pane-value">{recordData.item}</span>
                 </div>
                 <div className="pane-meta-row">
+                    <span className="pane-key">NAME:</span>
+                    <span className="pane-value">{recordData.name}</span>
+                </div>
+                <div className="pane-meta-row">
                     <span className="pane-key">OBJECT CLASS:</span>
-                    <span className="pane-value ob_class">{recordData.object_class}</span>
+                    <span className="pane-value pane_ob_class">{recordData.object_class}</span>
+                </div>
+                <div className="pane-meta-row">
+                    <span className="pane-key">RATING:</span>
+                    <span className="pane-value rating">+{recordData.rating}</span>
                 </div>
             </div>
+
             {/* description */}
             <div className="pane-section">
                 <div className="pane-section-title">Description</div>

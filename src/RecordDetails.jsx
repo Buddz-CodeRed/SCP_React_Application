@@ -38,20 +38,28 @@ export default function RecordDetails() {
                         {/* header */}
                         <div className='detail-header'>
                             <div className='detail-item'>{recordData.item}</div>
-                        </div>
-                        <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${recordData.image}`} className='detail-image' alt="SCP Image" />
+                        
+                            <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${recordData.image}`} className='detail-image' alt="SCP Image" />
 
-                        {/* meta data */}
-                        <div className="detail-meta">
-                            <div className="detail-meta-row">
-                                <span className="detail-key">ITEM#:</span>
-                                <span className="detail-value">{recordData.item}</span>
+                            {/* meta data */}
+                            <div className="detail-meta">
+                                <div className="detail-meta-row">
+                                    <span className="detail-key">ITEM#:</span>
+                                    <span className="detail-value">{recordData.item}</span>
+                                </div>
+                                <div className="detail-meta-row">
+                                    <span className="detail-key">NAME:</span>
+                                    <span className="detail-value">{recordData.name}</span>
+                                </div>
+                                <div className="detail-meta-row">
+                                    <span className="detail-key">OBJECT CLASS:</span>
+                                    <span className="detail-value ob_class">{recordData.object_class}</span>
+                                </div>
+                                <div className="detail-meta-row">
+                                    <span className="detail-key">RATING:</span>
+                                    <span className="detail-value">+{recordData.rating}</span>
+                                </div>
                             </div>
-                            <div className="detail-meta-row">
-                                <span className="detail-key">OBJECT CLASS:</span>
-                                <span className="detail-value ob_class">{recordData.object_class}</span>
-                            </div>
-
                         </div>
 
                         {/* description */}
@@ -68,13 +76,6 @@ export default function RecordDetails() {
                                 {recordData.containment_procedure}
                             </p>
                         </div>
-
-                        {/* Actions */}
-                        <div className="detail-actions">
-                            <button className="btn-favorite">★ Favorite</button>
-                            <button className="btn-view-file">⊞ View Full File</button>
-                        </div>
-
                     </div>
                 ) : (
                     <p>Loading...</p>

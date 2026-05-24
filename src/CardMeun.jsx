@@ -22,7 +22,7 @@ export default function CardMenu() {
             const fetchRecords = async () => {
                 // query db only selecting the id and item and store in 'data' variable
                 // waits for process to complete before continuing
-                const { data, error } = await supabase.from('scp_data').select('id, item, image, object_class, description').order('item', { ascending: true })
+                const { data, error } = await supabase.from('scp_data').select('id, item, name, rating, image, object_class, description').order('item', { ascending: true })
                 if (error) {
                     console.error(error) // display error
                 }

@@ -66,7 +66,18 @@
     color: #e8e8e8;
 }
 
-.ob_class {
+.pane_ob_class {
+    background-color: transparent;
+    border: 1px solid #c0392b;
+    color: #c0392b;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.rating {
     background-color: #c0392b;
     color: #fff;
     font-size: 0.6rem;
