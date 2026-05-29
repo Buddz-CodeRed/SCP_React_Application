@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom"
-import CardMenu from "./CardMeun"
+import CardMenu from "./CardMenu"
 import RecordDetails from "./RecordDetails"
 import AdminPanel from "./AdminPanel"
 import SidePane from "./SidePane"
+import { supabase } from "./supabase"
+import NavMenu from "./NavMenu"
+import { useState } from "react"
 
-export default function Window() {
+export default function Window({viewMode}) {
+    console.log("Window viewMode:", viewMode)
 
     const { viewName, id } = useParams()
 
@@ -17,16 +21,25 @@ export default function Window() {
         )
     }
 
+    if (viewMode){
+        return(
+            <div className="AP-window">
+                <AdminPanel viewMode={viewMode}/>
+            </div>
+        )
+    }
+
     // Normal views (cards, admin, etc.)
     const view = {
         cards: <CardMenu />,
-        details: <RecordDetails id={id} />,
-        admin: <AdminPanel />
+        details: <RecordDetails id={id} />
     }
 
     return (
-        <div className="window-container">
-            {view[viewName] || <CardMenu />}
+        <div>
+            <div className="window-container">
+                {view[viewName] || <CardMenu />}
+            </div>
         </div>
     )
 }

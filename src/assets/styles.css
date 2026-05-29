@@ -19,17 +19,44 @@
     display: flex;
     align-items: stretch;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
 }
 
 .window-container {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     height: 100%;
+    min-height: 0;
     overflow: hidden;
 }
 
-/*  AdminPanel.jsx */
-.admin-container {
-    border: solid green;
-    width: 100%;
+::-webkit-scrollbar {
+    width: 4px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 1px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 6px;
+    border: 3px solid #fa0000;
+    box-shadow:
+        0 0 5px #ff4800,
+        0 0 15px #e60505,
+        inset 0 0 5px rgba(172, 4, 4, 0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d32a2a;
+    box-shadow:
+        0 0 5px #ff4800,
+        0 0 15px #e60505,
+        inset 0 0 5px rgba(172, 4, 4, 0.8);
 }

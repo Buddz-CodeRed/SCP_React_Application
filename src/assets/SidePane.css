@@ -3,7 +3,7 @@
 .side-pane {
     position: fixed;
     top: 0;
-    right: -300px;          /* hidden off screen to the right */
+    right: -300px;  
     width: 300px;
     height: 100vh;
     overflow-y: auto;
@@ -17,7 +17,6 @@
 .side-pane.open {
     right: 0;     
 }
-
 
 .pane-item {
     font-size: 1.4rem;
@@ -77,10 +76,10 @@
     letter-spacing: 0.08em;
 }
 
-.rating {
-    background-color: #c0392b;
-    color: #fff;
-    font-size: 0.6rem;
+.pane_rating {
+    background-color: transparent;
+    color: #fdad01;
+    font-size: 0.8rem;
     padding: 2px 8px;
     border-radius: 3px;
     text-transform: uppercase;
@@ -107,8 +106,6 @@
     color: #888;
     line-height: 1.7;
     margin: 0;
-
-    /* Preview clamp */
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 7;

@@ -1,9 +1,10 @@
 import {useEffect, useState} from 'react' // useEffect: fetching data | useState: storing data
 import {supabase} from './supabase' // connects to database
+import NavMenu from './NavMenu'
+import './assets/AdminPanel.css'
 
-export default function AdminPanel(){
+export default function AdminPanel({ viewMode }){
 
-    
     const [records, setRecords] = useState([]) // set component state to store all records fetcher from db; starts in an empty state
     const [editRecords, setEditRecords] = useState(null) // set component state to hold current record being edited; starts in an empty state
     const [imageFile, setImageFile] = useState(null)
@@ -38,16 +39,14 @@ export default function AdminPanel(){
     )
 
     // Create aysnc function to INSRET a new record into the database
-    const addRecord = async () => {
-
-        // upload image to supabase bucket
+    const addRecord = async () => {        
         let fileName = null
 
         if(imageFile) {
-            const fileExt = imageFile.name.split('.').pop()
-            fileName = `${crypto.randomUUID()}.${fileExt}`
+            const fileExt = imageFile.name.split('.').pop() // stores the extension of the file to a variable
+            fileName = `${crypto.randomUUID()}.${fileExt}` 
 
-            const {error: uploadError} = await supabase.storage.from('image').upload(fileName, imageFile) // CHECK THIS CODE <LINE>
+            const {error: uploadError} = await supabase.storage.from('image').upload(fileName, imageFile)
 
             if (uploadError) {
                 console.error(uploadError)
@@ -55,7 +54,6 @@ export default function AdminPanel(){
             }
         }
         const { id, ...cleanRecord } = newRecord;
-
         const { data, error } = await supabase
             .from('scp_data')
             .insert([{ ...cleanRecord, image: fileName }])
@@ -67,8 +65,8 @@ export default function AdminPanel(){
         else
         {
             setRecords([...records, ...data])// adds new records to existing list
-            setNewRecord({item: '', object_class: '', containment_procedure: '', description: '', image: ''}) // Resets form back to empty strings
-            setImageFile(null)
+            setNewRecord({item: '', object_class: '', containment_procedure: '', description: '', image: ''})
+            setImageFile(null) // Resets form back to empty strings
         }
     }
 
@@ -112,53 +110,107 @@ export default function AdminPanel(){
 
     return(
         <div className='admin-container'>
-            <h1>Admin Panel</h1>
 
-            <h2>Add New Record</h2>
-
-            <input value={newRecord.item} onChange={(e)=>setNewRecord({...newRecord, item: e.target.value})} placeholder='Item'/>
-            <input value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Object Class'/>
-            <input value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
-            <input value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Description'/>
-            <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])}/>
-            <button onClick={addRecord}>Add Record</button>
+            <div className='header'>
+                <h1 className='title'>Admin Panel</h1>
+            </div>
+            <h3 className='sub-title'>Level 4 Clearance</h3>
             
-            <ul>
-                {
-                    records.map((record) => (
-                            <li key={record.id}>
-                                {
-                                    editRecords && editRecords.id === record.id ? (
-                                        <div>
-                                            <input value={editRecords.item} onChange={(e)=>setEditRecords({...editRecords, item: e.target.value})}/>
-                                            <input value={editRecords.object_class} onChange={(e)=>setEditRecords({...editRecords, object_class: e.target.value})}/>
-                                            <input value={editRecords.containment_procedure} onChange={(e)=>setEditRecords({...editRecords, containment_procedure: e.target.value})}/>
-                                            <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})}/>
-                                            <button onClick={()=>saveEdit(record.id)}>Save</button>
-                                            <button onClick={()=>setEditRecords(null)}>Cancel</button>
-                                        </div>
-                                    ):(
-                                        <div>
-                                            <p>{record.item}</p>
-
-                                            {record.image && (
-                                                <img
-                                                    src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
-                                                    alt={record.item}
-                                                    width="100"
-                                                />
-                                            )}
-
-                                            <button onClick={()=>startEditing(record)}>Edit</button>
-                                            <button onClick={()=>deleteRecord(record.id)}>Delete</button>
-                                        </div>
-                                    )
-                                }
-                            </li>
+            {viewMode === 'add' && (
+                <div>
+                    <div className="add-record">
+                        <h2 className='mode'>Add New Record</h2>
+                        <input className='ar-mode' value={newRecord.item} onChange={(e)=>setNewRecord({...newRecord, item: e.target.value})} placeholder='Item'/>
+                        <input className='ar-mode' value={newRecord.object_class} onChange={(e)=>setNewRecord({...newRecord, object_class: e.target.value})} placeholder='Object Class'/>
+                        <input className='ar-mode' value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
+                        <input className='ar-mode' value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Description'/>
+                        <input className='ar-mode' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
+                    </div>
+                    <div className="btn">
+                        <button className='add-btn' onClick={addRecord}>Add Record</button>
+                    </div>
+                </div>
+            )}
+            
+            {viewMode === 'edit' && (
+                
+                <ul className='record-list-container'>
+                    <div className='edit-title'>Edit Record Panel</div>
+                    {
+                        records.map((record) => (
+                                <li key={record.id}>
+                                    {
+                                        editRecords && editRecords.id === record.id ? (
+                                            <div className='edit-record'>
+                                                <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`} alt={record.item} width="100"/>
+                                                <input value={editRecords.item} onChange={(e)=>setEditRecords({...editRecords, item: e.target.value})}/>
+                                                <input value={editRecords.object_class} onChange={(e)=>setEditRecords({...editRecords, object_class: e.target.value})}/>
+                                                <input value={editRecords.containment_procedure} onChange={(e)=>setEditRecords({...editRecords, containment_procedure: e.target.value})}/>
+                                                <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})}/>
+                                                <button onClick={()=>saveEdit(record.id)}>Save</button>
+                                                <button onClick={()=>setEditRecords(null)}>Cancel</button>
+                                            </div>
+                                        ):(
+                                            <div className='table-wrapper'>
+                                                <button className='add-btn'onClick={()=>startEditing(record)}><div className="table-list"> 
+                                                    {record.image && (
+                                                        <img
+                                                            src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
+                                                            alt={record.item}
+                                                            width="100"
+                                                        />
+                                                    )}
+                                                    <p className='tag'>{record.item}</p>  
+                                                    <p className='classLevel'>{record.object_class}</p>
+                                                </div></button>
+                                            </div>                                
+                                        )
+                                    }
+                                </li>
+                            )
                         )
-                    )
-                }
-            </ul>
+                    }
+                </ul>
+            )}
+
+            {viewMode === 'delete' && (
+                
+                <ul className='record-list-container'>
+                    <div className='edit-title'>Delete Record Panel</div>
+                    {
+                        records.map((record) => (
+                                <li key={record.id}>
+                                    {
+                                        deleteRecord && deleteRecord.id === record.id ? (
+                                            <div className='del-record'>
+                                                <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`} alt={record.item} width="100"/>
+                                                <input value={editRecords.item} onChange={(e)=>setEditRecords({...editRecords, item: e.target.value})}/>
+                                                <input value={editRecords.object_class} onChange={(e)=>setEditRecords({...editRecords, object_class: e.target.value})}/>
+                                                <input value={editRecords.containment_procedure} onChange={(e)=>setEditRecords({...editRecords, containment_procedure: e.target.value})}/>
+                                                <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})}/>
+                                            </div>
+                                        ):(
+                                            <div className='table-wrapper'>
+                                                <button className='add-btn'onClick={()=>deleteRecord(record.id)}><div className="table-list"> 
+                                                    {record.image && (
+                                                        <img
+                                                            src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
+                                                            alt={record.item}
+                                                            width="100"
+                                                        />
+                                                    )}
+                                                    <p className='tag'>{record.item}</p>  
+                                                    <p className='classLevel'>{record.object_class}</p>
+                                                </div></button>
+                                            </div>                                
+                                        )
+                                    }
+                                </li>
+                            )
+                        )
+                    }
+                </ul>
+            )}           
         </div>
     )
 }

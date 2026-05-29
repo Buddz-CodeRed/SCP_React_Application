@@ -33,7 +33,7 @@ export default function SidePane({recordData, onOpenFull, onClose}) {
                 </div>
                 <div className="pane-meta-row">
                     <span className="pane-key">RATING:</span>
-                    <span className="pane-value rating">+{recordData.rating}</span>
+                    <span className="pane-value pane_rating">+{recordData.rating}</span>
                 </div>
             </div>
 
