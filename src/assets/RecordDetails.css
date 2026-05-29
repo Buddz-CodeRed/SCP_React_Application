@@ -32,19 +32,16 @@
 }
 
 .heading {
-    font-size: 2.4rem;
-    font-weight: 500;
     color: #e74c3c;
-    letter-spacing: 0.08em;
-    line-height: 1;
-    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
 }
 
 .sub-header {
-    color: white;
-    letter-spacing: 0.08em;
-    line-height: 1.5;
-    margin: 0;
+    font-weight: 100;
+    color: #b1b1b1;
+    padding-bottom: 7px;
 }
 
 /* --- Media Elements & Grid --- */

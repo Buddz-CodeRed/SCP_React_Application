@@ -136,7 +136,7 @@ export default function AdminPanel({ viewMode }){
                         <input className='ar-mode' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
                     </div>
                     <div className="btn">
-                        <button className='add-btn' onClick={addRecord}>Add Record</button>
+                        <button className='add-btn alert-success' onClick={addRecord}>Add Record</button>
                     </div>
                 </div>
             )}
@@ -160,7 +160,7 @@ export default function AdminPanel({ viewMode }){
                                                 <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})} placeholder='Description'/>
                                                 <input className='ar-mode' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
                                                 <div className='edit-btns'>
-                                                    <span><button onClick={()=>saveEdit(record.id)}>Save</button></span>
+                                                    <span><button onClick={()=>saveEdit(record.id)} className='alert-success'>Save</button></span>
                                                     <span><button onClick={()=>setEditRecords(null)}>Cancel</button></span>
                                                 </div>
                                             </div>
