@@ -70,7 +70,7 @@ export default function CardMenu() {
                                                 </div>
                                                 {/* card body */}
                                                 <div className='card-body'>
-                                                    <div className='card-name'>{record.item}</div>
+                                                    <div className='card-name'>{record.name}</div>
                                                 </div>
                                             </div>
                                         </li>
