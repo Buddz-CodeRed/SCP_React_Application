@@ -60,7 +60,7 @@
 
 .ar-mode,
 .edit-record input {
-    height: 35px;
+    height: 49px;
     width: 100%;
     padding: 8px 12px;
     background-color: #2a2a2a;
@@ -69,6 +69,7 @@
     color: #eee;
     box-sizing: border-box;
 }
+
 
 .ar-mode:focus,
 .edit-record input:focus {

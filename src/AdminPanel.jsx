@@ -136,7 +136,7 @@ export default function AdminPanel(){
                         <input className='ar-mode' value={newRecord.rating} onChange={(e)=>setNewRecord({...newRecord, rating: e.target.value})} placeholder='Rating'/>
                         <input className='ar-mode' value={newRecord.containment_procedure} onChange={(e)=>setNewRecord({...newRecord, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
                         <input className='ar-mode' value={newRecord.description} onChange={(e)=>setNewRecord({...newRecord, description: e.target.value})} placeholder='Description'/>
-                        <input className='ar-mode' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
+                        <input className='ar-mode ar-image' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
                     </div>
                     <div className="btn">
                         <button className='add-btn alert-success' onClick={addRecord}>Add Record</button>
@@ -161,7 +161,7 @@ export default function AdminPanel(){
                                                 <input value={editRecords.rating} onChange={(e)=>setEditRecords({...editRecords, rating: e.target.value})} placeholder='Rating'/>
                                                 <input value={editRecords.containment_procedure} onChange={(e)=>setEditRecords({...editRecords, containment_procedure: e.target.value})} placeholder='Containment Procedure'/>
                                                 <input value={editRecords.description} onChange={(e)=>setEditRecords({...editRecords, description: e.target.value})} placeholder='Description'/>
-                                                <input className='ar-mode' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
+                                                <input className='ar-mode ar-image' type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} placeholder='{value.toString("Image)'/>
                                                 <div className='edit-btns'>
                                                     <span><button onClick={()=>saveEdit(record.id)} className='alert-success'>Save</button></span>
                                                     <span><button onClick={()=>setEditRecords(null)}>Cancel</button></span>
