@@ -2,16 +2,9 @@ import { NavLink, Link } from 'react-router-dom' // navigate through links with 
 import { useState } from 'react';
 import './assets/NavMenu.css'
 
-export default function NavMenu({ setViewMode }) {
+export default function NavMenu() {
 
-    const [isAdminOpen, setIsAdminOpen] = useState(false)
-
-    const handleAdminAction = (mode) => {
-        console.log("handleAdminAction called with:", mode)
-        setViewMode(mode);
-        setIsAdminOpen(false);
-    }
-    
+    const [isAdminOpen, setIsAdminOpen] = useState(false)    
 
     return (
         <div className='sidebar'>
@@ -27,15 +20,21 @@ export default function NavMenu({ setViewMode }) {
                 <nav className='nav-link-items'>
                     <NavLink to={`/window/cards/`}>Card Menu</NavLink>
                     <NavLink to={`/window/details/1`}>Records</NavLink>
-                    <NavLink to={`/window/admin`} onClick={() => setIsAdminOpen(prev => !prev)}>
-                        <div >Admin Panel</div>
-                    </NavLink>
+                    <div >
+                        <NavLink to={`/window/admin`} onClick={() => setIsAdminOpen(prev => !prev)} className="link-btn-AP">Admin Panel</NavLink>
+                    </div>
                     
                     {isAdminOpen && (
                     <ul className='nav-sub-link'>
-                        <li className="link-btn" onClick={() => handleAdminAction("add")}>Add</li>
-                        <li className="link-btn" onClick={() => handleAdminAction("edit")}>Edit</li>
-                        <li className="link-btn" onClick={() => handleAdminAction("delete")}>Delete</li>                       
+                        <li>
+                            <NavLink className="link-btn" to="/window/admin/add">Add</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="link-btn" to="/window/admin/edit">Edit</NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="link-btn" to="/window/admin/delete">Delete</NavLink>
+                        </li>                     
                     </ul>)
                     }                    
                 </nav>

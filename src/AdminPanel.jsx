@@ -1,10 +1,13 @@
 import {useEffect, useState} from 'react' // useEffect: fetching data | useState: storing data
 import {supabase} from './supabase' // connects to database
+import { useParams } from 'react-router-dom'
 import NavMenu from './NavMenu'
 import './assets/AdminPanel.css'
 import { v4 as uuidv4 } from 'uuid';
 
-export default function AdminPanel({ viewMode }){
+export default function AdminPanel(){
+
+    const { mode } = useParams()
 
     const [records, setRecords] = useState([]) // set component state to store all records fetcher from db; starts in an empty state
     const [editRecords, setEditRecords] = useState(null) // set component state to hold current record being edited; starts in an empty state
@@ -123,7 +126,7 @@ export default function AdminPanel({ viewMode }){
             </div>
             
             
-            {viewMode === 'add' && (
+            {mode === 'add' && (
                 <div>
                     <div className="add-record">
                         <h2 className='mode'>Add New Record</h2>
@@ -141,7 +144,7 @@ export default function AdminPanel({ viewMode }){
                 </div>
             )}
             
-            {viewMode === 'edit' && (
+            {mode === 'edit' && (
                 
                 <ul className='record-list-container'>
                     <div className='mode'>Edit Record Panel</div>
@@ -187,7 +190,7 @@ export default function AdminPanel({ viewMode }){
                 </ul>
             )}
 
-            {viewMode === 'delete' && (
+            {mode === 'delete' && (
                 
                 <ul className='record-list-container'>
                     <div className='mode'>Delete Record Panel</div>

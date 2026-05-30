@@ -66,6 +66,12 @@
     border-left-color: #2a2a2a;
 }
 
+.link-btn-AP a:hover {    
+    color: #a2a2a2;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-left-color: #2a2a2a;
+}
+
 .nav-link-items a.active {
     color: #e74c3c;
     background-color: rgba(231, 76, 60, 0.08);
