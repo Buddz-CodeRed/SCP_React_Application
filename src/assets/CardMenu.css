@@ -3,7 +3,7 @@
     display: flex;
     /* flex-direction: column; */
     flex: 1;
-    background-color: #1a1a1a !important;
+    /* background-color: #1a1a1a !important; */
     border-left: 1px solid #2a2a2a;
     height: 100%;
     min-height: 0;

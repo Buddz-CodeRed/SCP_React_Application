@@ -3,7 +3,7 @@
     width: 220px;
     min-width: 220px;
     height: 100vh;
-    background-color: #111111;
+    background-color:  rgba(15, 15, 15, 0.95);
     border-right: 1px solid #2a2a2a;
     display: flex;
     flex-direction: column;

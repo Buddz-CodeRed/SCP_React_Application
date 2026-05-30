@@ -17,7 +17,7 @@ body,
 }
 
 body {
-    background-image: url('/public/image/scp-background.jpg');
+    background-image: url('/public/image/background-image.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
