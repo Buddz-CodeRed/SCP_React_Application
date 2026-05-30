@@ -4,6 +4,7 @@ import { supabase } from './supabase' // connects to database
 import SidePane from './SidePane'
 import { useNavigate } from 'react-router-dom'
 import './assets/CardMenu.css'
+import { RingLoader } from 'react-spinners'
 
 export default function CardMenu() {
 
@@ -15,6 +16,8 @@ export default function CardMenu() {
     const [sidepane, setSidePane] = useState(false)
     const [selectedRecord, setSelectedRecord] = useState(null)
     const navigate = useNavigate()
+
+    const [loading, setLoading] = useState(true);
 
     useEffect(
         () => {
@@ -29,6 +32,7 @@ export default function CardMenu() {
                 else {
                     // update records state with array of records; triggers component to re-render
                     setRecord(data)
+                    setLoading(false)
                 }
             }
             // calls async function
@@ -38,6 +42,12 @@ export default function CardMenu() {
 
     return (
         <div className='card-container'>
+            {loading && (
+                <div className='loader'>
+                    <RingLoader color="#d53535" size={80} />
+                    Loading
+                </div>
+            )}
             <div className={`card-scroll ${sidepane ? 'pushed' : ''}`}>
                 <nav>
                     <div className='container-fluid p-3'>

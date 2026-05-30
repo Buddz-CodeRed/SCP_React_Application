@@ -3,6 +3,7 @@ import { supabase } from './supabase' // connects to database
 import { useParams } from 'react-router-dom' // captures dynamic value from URL in BrowserRouter
 import './assets/RecordDetails.css'
 import { useNavigate } from 'react-router-dom'
+import RingLoader from 'react-spinners/RingLoader'
 
 export default function RecordDetails() {
 
@@ -10,6 +11,7 @@ export default function RecordDetails() {
     const [recordData, setRecordData] = useState(null) // creates a state variable 'recordData' to store fetched record, starts as null
     const navigate = useNavigate();
     const [totalItems, setTotalItems] = useState([])
+    const [loading, setLoading] = useState(true);
 
     // get total count of items
     useEffect(() => {
@@ -108,7 +110,10 @@ export default function RecordDetails() {
                         </div>
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <div className='loader'>
+                        <RingLoader color="#d53535" cssOverride={{display: "block"}} size={80}/>
+                        Loading...
+                    </div>
                 )
             }
         </div>

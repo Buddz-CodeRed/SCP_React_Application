@@ -11,6 +11,7 @@ html,body,:root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior-x: none;
+    width: 100vw;
 }
 
 /* App.jsx */
@@ -59,3 +60,4 @@ html,body,:root {
         0 0 15px #e60505,
         inset 0 0 5px rgba(172, 4, 4, 0.8);
 }
+

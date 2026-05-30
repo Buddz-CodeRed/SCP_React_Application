@@ -191,3 +191,10 @@
     cursor: not-allowed;
     pointer-events: none;
 }
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
