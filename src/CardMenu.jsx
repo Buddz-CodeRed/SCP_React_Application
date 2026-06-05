@@ -8,59 +8,48 @@ import { RingLoader } from 'react-spinners'
 
 export default function CardMenu() {
 
-    // Store list of records starting at an empty (array) state !!!
-    // Replace empty array with fetched data when function is called
     const [records, setRecord] = useState([])
-
-    // Sidepane state
     const [sidepane, setSidePane] = useState(false)
     const [selectedRecord, setSelectedRecord] = useState(null)
-    const navigate = useNavigate()
-
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate()    
 
+    // fetches all record data from database; stores in state as an array in ascending order by item
     useEffect(
         () => {
-            // define async function
             const fetchRecords = async () => {
-                // query db only selecting the id and item and store in 'data' variable
-                // waits for process to complete before continuing
                 const { data, error } = await supabase.from('scp_data').select('id, item, name, rating, image, object_class, description').order('item', { ascending: true })
                 if (error) {
-                    console.error(error) // display error
+                    console.error(error) // display error id console
                 }
                 else {
-                    // update records state with array of records; triggers component to re-render
-                    setRecord(data)
-                    setLoading(false)
+                    setRecord(data) // stores data in state
+                    setLoading(false) // hides spinner once data is loaded
                 }
             }
-            // calls async function
             fetchRecords()
         }, []
     )
 
     return (
         <div className='card-container'>
-            {loading && (
+            {loading && ( // activate if true, deactivate if false; depending on render status
                 <div className='loader'>
                     <RingLoader color="#d53535" size={80} />
                     Loading
                 </div>
             )}
-            <div className={`card-scroll ${sidepane ? 'pushed' : ''}`}>
+            <div className={`card-scroll ${sidepane ? 'pushed' : ''}`}> {/* adjusts page layout when sidepane is active */}
                 <nav>
                     <div className='container-fluid p-3'>
                         <ul className='card-list'>
-                            {   // loops over the records array
-                                // creates a link for each record via id
-                                records.map(
-                                    // stores individual record during the looping process
-                                    (record) => (
-                                        // identifies each record in the array 
-                                        <li key={record.id} className='card-item'>
-                                            {/* creates a link to side pane for each record using record item value */}
-                                            <div className='card-link' onClick={() => { setSelectedRecord(record); setSidePane(true); }}>
+                            { 
+                                records.map( // maps through the records array
+                                    (record) => ( // render each element as a list item
+                                        <li key={record.id} className='card-item'> {/* identify each element via record id */}
+                                            <div className='card-link' onClick={() => { setSelectedRecord(record); setSidePane(true); }}> {/* when click side pane state is set to true */}
+                                                
+                                                {/* SidePane Body */}
                                                 <div className='card-wrap'>
                                                     <img
                                                         src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${record.image}`}
@@ -72,6 +61,7 @@ export default function CardMenu() {
                                                 <div className='card-body'>
                                                     <div className='card-name'>{record.name}</div>
                                                 </div>
+
                                             </div>
                                         </li>
                                     )

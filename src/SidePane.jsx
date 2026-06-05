@@ -1,22 +1,21 @@
 import './assets/SidePane.css'
 import { X } from 'lucide-react'
 
-
 export default function SidePane({recordData, onOpenFull, onClose}) {
 
-
+    // check if data was passed
     if (!recordData) {
             return(
                 <div className="side-pane">No Data Received</div>
             )
         }
-        console.log(recordData)
 
     return(
         <div className={`side-pane ${recordData ? 'open' : ''}`}>
             <span className='pane-item'>{recordData.item}</span>
             <button className='pane-close' onClick={onClose}><X /></button>
             <img src={`https://gjhshavljufiktsguwpw.supabase.co/storage/v1/object/public/image/${recordData.image}`} className='pane-image' alt="SCP Image" />
+
             {/* meta data */}
             <div className="pane-meta">
                 <div className="pane-meta-row">

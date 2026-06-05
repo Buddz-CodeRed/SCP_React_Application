@@ -8,49 +8,45 @@ import RingLoader from 'react-spinners/RingLoader'
 export default function RecordDetails() {
 
     const { id } = useParams() // extracts the 'id' value from current URL
-    const [recordData, setRecordData] = useState(null) // creates a state variable 'recordData' to store fetched record, starts as null
-    const navigate = useNavigate();
-    const [totalItems, setTotalItems] = useState([])
-    const [loading, setLoading] = useState(true);
+    const [recordData, setRecordData] = useState(null) // (HooK) stores the currently selected scp record
+    const navigate = useNavigate(); // navigates between records via navigation buttons
+    const [totalItems, setTotalItems] = useState([]) // stores record IDs to support navigation buttons
+    const [loading, setLoading] = useState(true); // loading spinner is active untill data is fetched
 
-    // get total count of items
+    // after inital render from root -> useEffect triggers side affect that runs the function -> data is stored in the useState -> state change triggers a re-render
+    
     useEffect(() => {
-        const getCount = async () => {
-            const { data } = await supabase.from('scp_data').select('id').order('item', { ascending: true })
-            setTotalItems(data || [])
+        const getCount = async () => { // (side affect)
+            const { data } = await supabase.from('scp_data').select('id').order('item', { ascending: true }) // query db to select id matching all items the are in ascending order
+            setTotalItems(data || []) // passes data to update useState, if data is missing pass empty array
         }
-        getCount()
-    }, [id])
+        getCount() // calls function
+    }, [id]) // tracks current id when changed
 
     useEffect(
-        // creates a function to call later
         () => {
-            console.log("RecordID received:", id)
-            // defines async function 
-            const fetchRecordDetails = async () => {
-                // query db selecting all records with a matching id, and return a single object
-                const { data, error } = await supabase.from('scp_data').select('*').eq('id', id).maybeSingle()
+            const fetchRecordDetails = async () => {                
+                const { data, error } = await supabase.from('scp_data').select('*').eq('id', id).maybeSingle() // query db selecting all records with a matching id, and return a single object
                 if (error) {
-                    // log error to the console
-                    console.error(error)
+                    console.error(error) // log error to the console
                 }
-                else {
-                    // save the fetched record into state; triggers component to re-render
-                    setRecordData(data)
+                else {                    
+                    setRecordData(data) // pass data to update useState
                 }
             }
-            // call function
-            fetchRecordDetails()
-        }, [id]
+            fetchRecordDetails()// call function
+        }, [id] // tracks current id when changed
     )
 
-    // 2. Locate exactly where the current page's ID fits inside our real database array
-    const currentIdx = totalItems.findIndex(r => String(r.id) === String(id))
+    const currentIdx = totalItems.findIndex(r => String(r.id) === String(id)) // finds index position of id's in the ordered list (maps the list to find the start and end; assisting with the navigation buttons)
 
     return (
+
+        // main section
+
         <div className='detail-container'>
             {
-                recordData ? (
+                recordData ? ( // if...else (ternary operator)
                     <div className='detail-content-wrapper'>
 
                         <div className="header">
@@ -96,20 +92,25 @@ export default function RecordDetails() {
                             </p>
                         </div>
 
+                        {/* Navigation buttons */}
+
                         <div className='skip-btn'>
                             <span>
                                 <button onClick={() => navigate(`/window/details/${totalItems[currentIdx - 1].id}`)}
                                     className='skip-btn-check'
-                                    disabled={currentIdx <= 0}>Back</button>
+                                    disabled={currentIdx <= 0}>Back</button> {/* disables when the start is reached */}
                             </span>
                             <span>
                                 <button onClick={() => navigate(`/window/details/${totalItems[currentIdx + 1].id}`)}
                                     className='skip-btn-check'
-                                    disabled={currentIdx >= totalItems.length - 1 || currentIdx === -1}>Next</button>
+                                    disabled={currentIdx >= totalItems.length - 1 || currentIdx === -1}>Next</button> {/* disables when the end is reached */}
                             </span>
                         </div>
                     </div>
                 ) : (
+
+                    // loading spinner
+
                     <div className='loader'>
                         <RingLoader color="#d53535" cssOverride={{display: "block"}} size={80}/>
                         Loading...

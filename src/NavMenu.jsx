@@ -4,6 +4,8 @@ import './assets/NavMenu.css'
 
 export default function NavMenu() {
 
+    // sets up a variable to track if admin dropdown menu is visible or hidden
+    // by setting the state of false, the drop down menu is hidden untill admin link is clicked
     const [isAdminOpen, setIsAdminOpen] = useState(false)    
 
     return (
@@ -18,12 +20,12 @@ export default function NavMenu() {
 
             <div className='fluid nav-items'>
                 <nav className='nav-link-items'>
-                    <NavLink to={`/window/cards/`}>Card Menu</NavLink>
-                    <NavLink to={`/window/details/1`}>Records</NavLink>
-                    <div >
-                        <NavLink to={`/window/admin`} onClick={() => setIsAdminOpen(prev => !prev)} className="link-btn-AP">Admin Panel</NavLink>
+                    <NavLink to={`/window/cards/`}>Card Menu</NavLink> {/* sets link to Card Menu within the navigation side bar */}
+                    <NavLink to={`/window/details/1`}>Records</NavLink> {/* sets link to RecordDetails within the navigation side bar */}
+                    <div>
+                        <NavLink to={`/window/admin`} onClick={() => setIsAdminOpen(prev => !prev)} className="link-btn-AP">Admin Panel</NavLink> {/* sets link to AdminPanel and changes the useState to true */}
                     </div>
-                    
+                    {/* displays dropdown list when admin panel link is clicked */}
                     {isAdminOpen && (
                     <ul className='nav-sub-link'>
                         <li>

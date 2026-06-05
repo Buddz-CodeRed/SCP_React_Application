@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 export default function AdminPanel(){
 
     const { mode } = useParams()
-
     const [records, setRecords] = useState([]) // set component state to store all records fetcher from db; starts in an empty state
     const [editRecords, setEditRecords] = useState(null) // set component state to hold current record being edited; starts in an empty state
     const [imageFile, setImageFile] = useState(null)

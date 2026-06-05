@@ -1,4 +1,5 @@
-/* --- Core Containers --- */
+/* Main Section */
+
 .AP-window {
     width: 100%;
     height: 100%;
@@ -16,7 +17,8 @@
     box-sizing: border-box;
 }
 
-/* --- Sticky Header Section --- */
+/* Header */
+
 .header {
     display: block;
     top: 0;
@@ -48,36 +50,8 @@
     margin-bottom: 30px;
 }
 
-/* --- Add Record Form Component  --- */
-.add-record {
-    display: flex;
-    flex-direction: column;
-    margin: 15px auto;
-    width: 100%;
-    max-width: 500px;
-    gap: 12px;
-}
+/* Buttons */
 
-.ar-mode,
-.edit-record input {
-    height: 49px;
-    width: 100%;
-    padding: 8px 12px;
-    background-color: #2a2a2a;
-    border: 1px solid #3a3a3a;
-    border-radius: 4px;
-    color: #eee;
-    box-sizing: border-box;
-}
-
-
-.ar-mode:focus,
-.edit-record input:focus {
-    border-color: #e74c3c;
-    outline: none;
-}
-
-/* --- Universal Button Handling --- */
 .btn {
     display: flex;
     justify-content: center;
@@ -105,7 +79,8 @@ button:hover {
     max-width: 500px;
 }
 
-/* --- Record List Panel Structure --- */
+/* Record List */
+
 .record-list-container {
     flex-grow: 1;
     overflow-y: auto;
@@ -167,7 +142,37 @@ button:hover {
     background-color: #2a2a2a;
 }
 
-/* --- Active Edit Workflow Layout --- */
+/* Add */
+
+.add-record {
+    display: flex;
+    flex-direction: column;
+    margin: 15px auto;
+    width: 100%;
+    max-width: 500px;
+    gap: 12px;
+}
+
+.ar-mode,
+.edit-record input {
+    height: 49px;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 4px;
+    color: #eee;
+    box-sizing: border-box;
+}
+
+.ar-mode:focus,
+.edit-record input:focus {
+    border-color: #e74c3c;
+    outline: none;
+}
+
+/* Edit */
+
 .edit-record {
     display: flex;
     flex-direction: column;
@@ -194,7 +199,8 @@ button:hover {
     padding: 5px;
 }
 
-/* --- Delete Context Layout --- */
+/* Delete */
+
 .del-record {
     display: flex;
     justify-content: center;
